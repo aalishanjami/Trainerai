@@ -5,6 +5,9 @@
     <string name="title_exercises">Exercises</string>
     <string name="title_find_trainers">Find Trainers</string>
     <string name="title_profile">Profile</string>
+    <string name="facebook_app_id">2624799480877008</string>
+    <string name="fb_login_protocol_scheme">fb2624799480877008</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

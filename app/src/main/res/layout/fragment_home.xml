@@ -21,6 +21,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/but_camera"
                     app:srcCompat="@drawable/ic_photo_camera_white_24dp"
                     />
                 <TextView
@@ -35,6 +36,7 @@
                     app:srcCompat="@drawable/ic_chat_bubble_white_24dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
+                    android:id="@+id/but_msgs"
                     />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
