@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1047909350349",
+    "firebase_url": "https://trainerai.firebaseio.com",
+    "project_id": "trainerai",
+    "storage_bucket": "trainerai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047909350349:android:d6835abaaf3f3a87",
+        "android_client_info": {
+          "package_name": "detection.com.trainerai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047909350349-tp1mrokm5pif4pui6g2f7vjfgsat26co.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "detection.com.trainerai",
+            "certificate_hash": "e9e9ee99b171c4b106531936ad0cce5408840790"
+          }
+        },
+        {
+          "client_id": "1047909350349-l89s4tihjmnd2fu81omjk7bjk784ei01.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfmUJlko94t_aQlRWBIacCaWMzzDn-wLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047909350349-l89s4tihjmnd2fu81omjk7bjk784ei01.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
