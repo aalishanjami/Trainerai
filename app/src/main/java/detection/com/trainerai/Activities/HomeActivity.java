@@ -1,16 +1,24 @@
-package detection.com.trainerai;
+package detection.com.trainerai.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import detection.com.trainerai.Fragments.Exercises;
+import detection.com.trainerai.Fragments.FindTrainers;
+import detection.com.trainerai.Fragments.Home;
+import detection.com.trainerai.Fragments.Profile;
+import detection.com.trainerai.R;
+import detection.com.trainerai.utilities.DataProcessor;
 
 public class HomeActivity extends AppCompatActivity {
     private TextView mTextMessage;
+    DataProcessor dataProccessor;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,6 +64,16 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        dataProccessor = new DataProcessor(HomeActivity.this);
+        String jwtstr = dataProccessor.getStr("jwt");
+
+        if (jwtstr.isEmpty()){
+            startActivity(new Intent(HomeActivity.this, Login.class));
+        }
+
+
+
 
         //Moving to home
         Home home = new Home();

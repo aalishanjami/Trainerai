@@ -1,7 +1,9 @@
-package detection.com.trainerai;
+package detection.com.trainerai.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import detection.com.trainerai.R;
 
 public class RegisterTrainer extends AppCompatActivity {
 

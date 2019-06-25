@@ -1,4 +1,4 @@
-package detection.com.trainerai;
+package detection.com.trainerai.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import detection.com.trainerai.R;
 
 public class Camera extends AppCompatActivity {
 

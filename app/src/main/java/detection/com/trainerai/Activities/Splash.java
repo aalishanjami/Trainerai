@@ -1,9 +1,11 @@
-package detection.com.trainerai;
+package detection.com.trainerai.Activities;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import detection.com.trainerai.R;
 
 public class Splash extends AppCompatActivity {
 
@@ -18,6 +20,6 @@ public class Splash extends AppCompatActivity {
                 startActivity(new Intent(Splash.this, Login.class));
                 finish();
             }
-        }, secondsDelayed * 1000);
+        }, secondsDelayed * 10);
     }
 }
