@@ -20,4 +20,7 @@ public interface Trxpi {
 //    @Headers("Content-Type: application/json")
     @POST("login.php")
     Call<LoginResponse> loginuser(@Body LoginResponse loginResponse);
+
+    @POST("validate_token.php")
+    Call<DataResponse> jwtget(@Body DataResponse dataResponse);
 }

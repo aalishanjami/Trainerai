@@ -11,7 +11,7 @@ public class DataProcessor {
         this.context = context;
     }
 
-    public final static String PREFS_NAME = "appname_prefs";
+    public final static String PREFS_NAME = "trainerai_prefs";
 
     public static void setInt( String key, int value) {
         SharedPreferences sharedPref = context.getSharedPreferences(PREFS_NAME,0);
@@ -34,7 +34,7 @@ public class DataProcessor {
 
     public static String getStr(String key) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
-        return prefs.getString(key,"DNF");
+        return prefs.getString(key,"");
     }
 
     public static void setBool(String key, boolean value) {
