@@ -50,6 +50,7 @@ public class FindTrainers extends Fragment {
                 final TextView cityfinal = view.findViewById(R.id.cityfinal);
                 List<String> list = new ArrayList<String>();
                 list.add("----");
+                list.add("list 1");
                 list.add("list 2");
                 list.add("list 3");
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
