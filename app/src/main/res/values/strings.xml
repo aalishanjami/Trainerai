@@ -8,6 +8,22 @@
     <string name="facebook_app_id">2624799480877008</string>
     <string name="fb_login_protocol_scheme">fb2624799480877008</string>
 
+    <string name="city_prompt">Choose a City</string>
+
+    <string-array name="city_arrays">
+        <item>----</item>
+        <item>Lahore</item>
+        <item>Karachi</item>
+        <item>Multan</item>
+        <item>Faislabad</item>
+        <item>Islamabad</item>
+        <item>Peshawar</item>
+        <item>Gilgit</item>
+        <item>Gujranwala</item>
+        <item>Quetta</item>
+    </string-array>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
