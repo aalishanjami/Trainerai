@@ -51,6 +51,7 @@ public class FindTrainers extends Fragment {
                 List<String> list = new ArrayList<String>();
                 list.add("----");
                 list.add("list 1");
+                list.add("list 22");
                 list.add("list 2");
                 list.add("list 3");
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
