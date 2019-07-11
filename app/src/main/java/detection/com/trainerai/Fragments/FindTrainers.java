@@ -92,7 +92,7 @@ public class FindTrainers extends Fragment {
                 list.add("list 2");
                 list.add("list 3");
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_spinner_item, list);
+                        R.layout.item_spinner, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 cityspinner.setAdapter(dataAdapter);
 
@@ -213,19 +213,6 @@ public class FindTrainers extends Fragment {
             }
         });
         return v;
-    }
-
-    private void checkVal() {
-        String strcity = DataProcessor.getStr("city");
-        String strrating = DataProcessor.getStr("rating");
-        String strclients = DataProcessor.getStr("clients");
-        if (!strcity.equals("----")) {
-            if (!strrating.equals("----")) {
-                if (!strclients.equals("----")) {
-
-                }
-            }
-        }
     }
 
     //function that sends data through retrofit to db

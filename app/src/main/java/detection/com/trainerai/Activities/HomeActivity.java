@@ -27,7 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
-    private TextView mTextMessage;
+
+
     DataProcessor dataProccessor;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -94,7 +95,6 @@ public class HomeActivity extends AppCompatActivity {
 
         //defining bottom nav
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }

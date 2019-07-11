@@ -70,21 +70,28 @@ public class SearchResults extends Fragment {
         call.enqueue(new Callback<SearchResponse>() {
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
-                    mProgressBar.setVisibility(View.GONE);
-                    if (response.isSuccessful() && response.body() != null) {
-                        ArrayList<RecordsArray> recordArrays;
-                        recordArrays = new ArrayList<RecordsArray>(response.body().getRecords());
+                mProgressBar.setVisibility(View.GONE);
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<RecordsArray> recordArrays;
+                    recordArrays = new ArrayList<RecordsArray>(response.body().getRecords());
 //                        dataAdapter = new DataAdapter(recordArrays, getActivity());
-                        mRecyclerView.setAdapter(new DataAdapter(recordArrays, getActivity(), new DataAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(RecordsArray item) {
-                                Toast.makeText(getActivity(), "item clicked" + item.getId() + item.getCity(), Toast.LENGTH_SHORT).show();
-                            }
-                        }));
+                    mRecyclerView.setAdapter(new DataAdapter(recordArrays, getActivity(), new DataAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(RecordsArray item) {
+                            Toast.makeText(getActivity(), "item clicked" + item.getId() + item.getCity(), Toast.LENGTH_SHORT).show();
+                            DataProcessor.setStr("searchid", item.getId());
+                            SearchProfile fragment = new SearchProfile();
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.frame_homepage, fragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    }));
 
-                    } else {
-                        Toast.makeText(getActivity(), "wrong!" + response.errorBody(), Toast.LENGTH_LONG).show();
-                    }
+                } else {
+                    Toast.makeText(getActivity(), "wrong!" + response.errorBody(), Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

@@ -1,35 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
     android:orientation="vertical"
     tools:context=".Fragments.FindTrainers">
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/et_searchbar"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/trainersearchbut"
+        android:background="@drawable/customsearch"
+        android:hint="Enter Someone's Name"
+        android:textAlignment="center" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/trainersearchbut"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/but_auth"
+        android:layout_centerInParent="true"
+        android:fontFamily="serif"
+        android:text="Search"
+        android:textAllCaps="false"
+        android:textColor="#ffffff" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="Or TRY"
+        android:layout_below="@id/trainersearchbut"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_ques_try_search"
+        android:layout_marginTop="30dp"
+        android:textSize="17sp"
+        android:textColor="#000000" />
 
-        <Button
-            android:id="@+id/but_filt_trn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filters" />
+    <Button
+        android:id="@+id/but_filt_trn"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:text="Filters"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:layout_below="@id/tv_ques_try_search"
+        android:background="@drawable/but_auth"
+        android:fontFamily="serif"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/trainersearchbut"
-            android:text="search" />
 
-    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

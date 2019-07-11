@@ -4,63 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".Fragments.Filters">
 
     <TextView
         android:id="@+id/Filters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
         android:text="FILTERS"
-        android:textSize="35sp"
+        android:textSize="30sp"
+        android:textColor="#000000"
+        android:fontFamily="serif"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/cityfinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="nothing"
-        android:visibility="gone" />
+        android:text="Select City Preferred"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:fontFamily="serif"
+        />
 
     <Spinner
         android:id="@+id/city_filt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2" />
+        android:layout_marginTop="10dp"
+        />
 
     <TextView
         android:id="@+id/ratingfinal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:visibility="gone"
-        android:text="Rating"
-        android:textSize="30sp" />
+        android:text="Select Rating Preferred"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:fontFamily="serif"/>
     <Spinner
         android:id="@+id/ratingspinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2" />
+        android:layout_marginTop="10dp"
+        />
 
     <TextView
         android:id="@+id/clientfinal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:visibility="gone"
-        android:text="Client"
-        android:textSize="30sp" />
+        android:text="Select Clients Preferred"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:fontFamily="serif" />
     <Spinner
         android:id="@+id/clientspinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2" />
+        android:layout_marginTop="10dp"
+        />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Search Now"
         android:id="@+id/but_searchnow"
+        android:background="@drawable/but_auth"
+        android:fontFamily="serif"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
         />
 
 

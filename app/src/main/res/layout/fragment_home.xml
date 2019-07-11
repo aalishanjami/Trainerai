@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DBDBDB"
     tools:context=".Fragments.Home">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarhome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_home"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true">
 
             <RelativeLayout
@@ -23,34 +24,85 @@
 
                 <ImageView
                     android:id="@+id/but_camera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Trainer.ai" />
+                    android:fontFamily="@font/tenor_sans"
+                    android:text="Trainer.ai"
+                    android:textColor="#ffffff"
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/but_msgs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
+                    android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_chat_bubble_white_24dp" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appbarhome"
-        android:layout_marginTop="20dp"
-        android:textSize="30dp" />
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/appbarhome">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_home_makepost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+
+                <EditText
+                    android:id="@+id/et_writepostfromhome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Write something..."
+                    android:lines="4"
+                    android:theme="@style/MyEditTextTheme" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/et_writepostfromhome"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="7dp">
+
+                    <Button
+                        android:id="@+id/but_postfromhome"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/but_auth"
+                        android:fontFamily="serif"
+                        android:text="Post"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_allposts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_post" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

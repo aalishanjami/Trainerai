@@ -5,39 +5,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.Login">
+    tools:context="Activities.Login">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="email"
-        android:id="@+id/login_email"
-        />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:id="@+id/login_password"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:background="#000000"
+        android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="login"
-        android:id="@+id/but_login"
-        />
+        <TextView
+            android:id="@+id/tv_title-login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/line_title_login"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/tenor_sans"
+            android:text="Trainer.ai"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/gomain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-    <Button
-        android:id="@+id/goreguser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RegisterUser" />
+        <View
+            android:id="@+id/line_title_login"
+            android:layout_width="200dp"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:background="#ffffff" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_title_login"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="monospace"
+            android:text="Login"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/login_password"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:hint="email address"
+            android:inputType="textEmailAddress"
+            android:textSize="17sp"
+            android:theme="@style/MyEditTextTheme" />
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/but_login"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:textSize="17sp"
+            android:theme="@style/MyEditTextTheme" />
+
+        <Button
+            android:id="@+id/but_login"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/but_auth"
+            android:fontFamily="serif"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account?"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="serif"
+            android:textSize="10sp"
+            android:layout_above="@id/goreguser"
+            android:layout_marginBottom="10dp"
+            />
+
+        <Button
+            android:id="@+id/goreguser"
+            android:layout_width="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/but_auth"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:fontFamily="serif"
+            android:textColor="#ffffff"
+            />
+    </RelativeLayout>
 </LinearLayout>

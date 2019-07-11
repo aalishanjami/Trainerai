@@ -4,9 +4,10 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import detection.com.trainerai.Firebase.FBcreateuser;
 import detection.com.trainerai.Models.CreateUser;
 import detection.com.trainerai.Models.Trxpi;
 import detection.com.trainerai.R;
@@ -37,6 +46,7 @@ public class RegisterUser extends AppCompatActivity {
     ImageView dp;
     final Calendar myCalendar = Calendar.getInstance();
     public static final int PICK_IMAGE_REQUEST = 1;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -54,115 +64,131 @@ public class RegisterUser extends AppCompatActivity {
         }
     }
 
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_register_user);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register_user);
 
-            //typecasting user data
-            name = findViewById(R.id.et_name);
-            email = findViewById(R.id.et_email);
-            password = findViewById(R.id.et_password);
-            dob = findViewById(R.id.et_dob);
-            heightfoot = findViewById(R.id.et_heightfoot);
-            heightinch = findViewById(R.id.et_heightinch);
-            weight = findViewById(R.id.et_weight);
-            pic = findViewById(R.id.et_pic);
-            register = findViewById(R.id.but_reguser);
-            dp = findViewById(R.id.iv_pic);
+        //typecasting user data
+        name = findViewById(R.id.et_name);
+        email = findViewById(R.id.et_email);
+        password = findViewById(R.id.et_password);
+        dob = findViewById(R.id.et_dob);
+        heightfoot = findViewById(R.id.et_heightfoot);
+        heightinch = findViewById(R.id.et_heightinch);
+        weight = findViewById(R.id.et_weight);
+        register = findViewById(R.id.but_reguser);
+        firebaseAuth = FirebaseAuth.getInstance();
 
-            dp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   chooseImage();
-                }
-            });
+//        dp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                chooseImage();
+//            }
+//        });
 
-            //Minimum and Maximum values for int. 1-12 for inch, 1-10 for foot and 1-999 for weight in kgs
-            heightfoot.setFilters(new InputFilter[]{new InputFilterMinMax("1", "10")});
-            heightinch.setFilters(new InputFilter[]{new InputFilterMinMax("1", "12")});
-            weight.setFilters(new InputFilter[]{new InputFilterMinMax("1", "999")});
+        //Minimum and Maximum values for int. 1-12 for inch, 1-10 for foot and 1-999 for weight in kgs
+        heightfoot.setFilters(new InputFilter[]{new InputFilterMinMax("1", "10")});
+        heightinch.setFilters(new InputFilter[]{new InputFilterMinMax("1", "12")});
+        weight.setFilters(new InputFilter[]{new InputFilterMinMax("1", "999")});
 
-            //date picker dialog for date of birth of user
-            final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                      int dayOfMonth) {
-                    myCalendar.set(Calendar.YEAR, year);
-                    myCalendar.set(Calendar.MONTH, monthOfYear);
-                    myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    updateLabel();
-                }
-            };
+        //date picker dialog for date of birth of user
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
 
-            //calender initialisation upon clicking edit text of date of  birth
-            dob.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new DatePickerDialog(RegisterUser.this, date, myCalendar
-                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                }
-            });
-
+        //calender initialisation upon clicking edit text of date of  birth
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(RegisterUser.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
 
-            //upon clicking the register button, object of create user class is made and data is stored
-            register.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        //upon clicking the register button, object of create user class is made and data is stored
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    final String strname = name.getText().toString();
-                    final String stremail = email.getText().toString();
-                    final String strpass = password.getText().toString();
-                    final String strdob = dob.getText().toString();
-                    final String strheightfoot = heightfoot.getText().toString();
-                    final String strheightinch = heightinch.getText().toString();
-                    final String strweight = weight.getText().toString();
-                    final String strpic = pic.getText().toString();
+                final String strname = name.getText().toString();
+                final String stremail = email.getText().toString();
+                final String strpass = password.getText().toString();
+                final String strdob = dob.getText().toString();
+                final String strheightfoot = heightfoot.getText().toString();
+                final String strheightinch = heightinch.getText().toString();
+                final String strweight = weight.getText().toString();
+                final String strpic = "name";
 
-                    CreateUser createUser = new CreateUser(strname, stremail, strpass, strdob, strheightfoot, strheightinch, strweight, strpic);
-                    sendNetwrokRequest(createUser);
-                }
+                firebaseAuth.createUserWithEmailAndPassword(stremail.trim(), strpass.trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Toast.makeText(RegisterUser.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        if (!task.isSuccessful()) {
+//                            task.getException().getLocalizedMessage().contains()
+                            Toast.makeText(RegisterUser.this, "Authentication failed." + task.getException(),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterUser.this, "I reached", Toast.LENGTH_SHORT).show();
+                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                            final DatabaseReference myRef = firebaseDatabase.getReference("Users").child(firebaseAuth.getUid());
+                            FBcreateuser workerProfile = new FBcreateuser(strname, stremail);
+                            myRef.setValue(workerProfile);
+                            CreateUser createUser = new CreateUser(strname, stremail, strpass, strdob, strheightfoot, strheightinch, strweight, strpic);
+                            sendNetwrokRequest(createUser);
+                        }
+                    }
+                });
 
-            });
-        }
+            }
 
-        //function that sends data through retrofit to db
-        private void sendNetwrokRequest (CreateUser createUser){
-            Retrofit.Builder builder = new Retrofit.Builder()
-                    .baseUrl("http://thefaceb.com/trxpi/users/")
-                    .addConverterFactory(GsonConverterFactory.create());
-
-            Retrofit retrofit = builder.build();
-
-            Trxpi trxpi = retrofit.create(Trxpi.class);
-            Call<CreateUser> call = trxpi.createAccount(createUser);
-
-            call.enqueue(new Callback<CreateUser>() {
-                @Override
-                public void onResponse(Call<CreateUser> call, Response<CreateUser> response) {
-                    Toast.makeText(RegisterUser.this, "ok" + response.body().getId(), Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onFailure(Call<CreateUser> call, Throwable t) {
-                    Toast.makeText(RegisterUser.this, "wrong!" + t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-
-        //extract date from date picker function and set it on edit text
-        private void updateLabel () {
-            String myFormat = "dd-MMMM, yyyy"; //01-July, 1999 format
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-            dob.setText(sdf.format(myCalendar.getTime()));
-        }
-
-    public void chooseImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        });
     }
+
+    //function that sends data through retrofit to db
+    private void sendNetwrokRequest(CreateUser createUser) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://thefaceb.com/trxpi/users/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+
+        Trxpi trxpi = retrofit.create(Trxpi.class);
+        Call<CreateUser> call = trxpi.createAccount(createUser);
+
+        call.enqueue(new Callback<CreateUser>() {
+            @Override
+            public void onResponse(Call<CreateUser> call, Response<CreateUser> response) {
+                Toast.makeText(RegisterUser.this, "ok" + response.body().getId(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<CreateUser> call, Throwable t) {
+                Toast.makeText(RegisterUser.this, "wrong!" + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+    //extract date from date picker function and set it on edit text
+    private void updateLabel() {
+        String myFormat = "dd-MMMM, yyyy"; //01-July, 1999 format
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dob.setText(sdf.format(myCalendar.getTime()));
+    }
+
+//    public void chooseImage() {
+//        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        intent.setType("image/*");
+//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+//    }
+}
